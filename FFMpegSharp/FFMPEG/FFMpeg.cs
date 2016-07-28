@@ -24,6 +24,7 @@ namespace FFMpegSharp.FFMPEG
 
             var target = Environment.Is64BitProcess ? "x64" : "x86";
 
+            //Modify s a
             _ffmpegPath = ConfiguredRoot + $"\\{target}\\ffmpeg.exe";
         }
 
