@@ -7,6 +7,8 @@ namespace FFMpegSharp.FFMPEG.Atomic
 {
     internal static class Arguments
     {
+
+
         internal static string Speed(Speed speed)
         {
             return $"-preset {speed.ToString().ToLower()} ";
@@ -17,14 +19,14 @@ namespace FFMpegSharp.FFMPEG.Atomic
             return $"-quality good -cpu-used {cpu} -deadline realtime ";
         }
 
-        internal static string Audio(AudioCodec codec, AudioQuality bitrate)
+        internal static string Audio(AudioCodec codec, int bitrate)
         {
-            return $"-codec:a {codec.ToString().ToLower()} -b:a {(int) bitrate}k -strict experimental ";
+            return $"-acodec {codec.ToString().ToLower()} -b:a {bitrate}k ";
         }
 
         internal static string Video(VideoCodec codec, int bitrate = 0)
         {
-            var video = $"-codec:v {codec.ToString().ToLower()} ";
+            var video = $"-vcodec {codec.ToString().ToLower()} ";
 
             if (bitrate > 0)
                 video += $"-b:v {bitrate}k ";
@@ -125,7 +127,7 @@ namespace FFMpegSharp.FFMPEG.Atomic
         }
 
         internal static string FrameOutputCount(int number)
-        {
+{
             return $"-vframes {number} ";
         }
 

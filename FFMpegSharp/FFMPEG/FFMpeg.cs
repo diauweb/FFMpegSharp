@@ -94,7 +94,7 @@ namespace FFMpegSharp.FFMPEG
         /// <param name="multithread">Use multithreading for conversion.</param>
         /// <returns>Success state.</returns>
         public bool ToMp4(VideoInfo source, FileInfo output, Speed speed = Speed.SuperFast,
-            VideoSize size = VideoSize.Original, AudioQuality aQuality = AudioQuality.Normal, bool multithread = false)
+            VideoSize size = VideoSize.Original, int aQuality = 160, bool multithread = false)
         {
             _totalTime = source.Duration;
 
@@ -121,7 +121,7 @@ namespace FFMpegSharp.FFMPEG
         /// <param name="aQuality">Output audio quality.</param>
         /// <returns>Success state.</returns>
         public bool ToWebM(VideoInfo source, FileInfo output, VideoSize size = VideoSize.Original,
-            AudioQuality aQuality = AudioQuality.Normal)
+            int aQuality = 160)
         {
             _totalTime = source.Duration;
 
@@ -148,7 +148,7 @@ namespace FFMpegSharp.FFMPEG
         /// <param name="multithread">Use multithreading for conversion.</param>
         /// <returns>Success state.</returns>
         public bool ToOgv(VideoInfo source, FileInfo output, VideoSize size = VideoSize.Original,
-            AudioQuality aQuality = AudioQuality.Normal, bool multithread = false)
+            int aQuality = 160, bool multithread = false)
         {
             _totalTime = source.Duration;
 
@@ -204,7 +204,7 @@ namespace FFMpegSharp.FFMPEG
                        Arguments.Input(image) +
                        Arguments.Input(audio) +
                        Arguments.Video(VideoCodec.LibX264, 2400) +
-                       Arguments.Audio(AudioCodec.Aac, AudioQuality.Normal) +
+                       Arguments.Audio(AudioCodec.Aac, 160) +
                        Arguments.FinalizeAtShortestInput() +
                        Arguments.Output(output);
 
@@ -308,7 +308,7 @@ namespace FFMpegSharp.FFMPEG
         /// <param name="output">Output video file.</param>
         /// <param name="stopAtShortest">Indicates if the encoding should stop at the shortest input file.</param>
         /// <returns>Success state</returns>
-        public bool ReplaceAudio(VideoInfo source, FileInfo audio, FileInfo output, bool stopAtShortest = false)
+        public bool ReplaceAudio(VideoInfo source, FileInfo audio, FileInfo output, bool stopAtShortest = false , int aQuality = 160)
         {
             FfMpegHelper.ConversionExceptionCheck(source, output);
             FfMpegHelper.InputFilesExistExceptionCheck(audio);
@@ -317,7 +317,7 @@ namespace FFMpegSharp.FFMPEG
             var args = Arguments.Input(source) +
                        Arguments.Input(audio) +
                        Arguments.Copy(Channel.Video) +
-                       Arguments.Audio(AudioCodec.Aac, AudioQuality.Hd) +
+                       Arguments.Audio(AudioCodec.Aac, aQuality) +
                        Arguments.FinalizeAtShortestInput() +
                        Arguments.Output(output);
 
@@ -348,15 +348,13 @@ namespace FFMpegSharp.FFMPEG
 
             RunProcess(args, _ffmpegPath, true, rStandardError: true);
 
-            try
-            {
+            try {
                 Process.Start();
                 Process.ErrorDataReceived += OutputData;
                 Process.BeginErrorReadLine();
                 Process.WaitForExit();
             }
-            catch (Exception)
-            {
+            catch  {
                 successState = false;
             }
             finally

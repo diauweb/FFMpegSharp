@@ -52,7 +52,6 @@
     <Compile Include="FFMPEG\Exceptions\FFMpegException.cs" />
     <Compile Include="VideoInfoExtend.cs" />
     <Compile Include="FFMPEG\Atomic\Arguments.cs" />
-    <Compile Include="FFMPEG\Enums\AudioQuality.cs" />
     <Compile Include="FFMPEG\Enums\Codec.cs" />
     <Compile Include="FFMPEG\Enums\Speed.cs" />
     <Compile Include="FFMPEG\Enums\VideoSize.cs" />
@@ -66,42 +65,12 @@
     <Compile Include="VideoInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FFMPEG\bin\x64\ffmpeg.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FFMPEG\bin\x64\ffprobe.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FFMPEG\bin\x86\ffmpeg.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FFMPEG\bin\x86\ffprobe.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="kite_toolbox.ico" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Content Include="FFMPEG\bin\presets\ffprobe.xsd">
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FFMPEG\bin\presets\libvpx-1080p.ffpreset">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FFMPEG\bin\presets\libvpx-1080p50_60.ffpreset">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FFMPEG\bin\presets\libvpx-360p.ffpreset">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FFMPEG\bin\presets\libvpx-720p.ffpreset">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FFMPEG\bin\presets\libvpx-720p50_60.ffpreset">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FFMPEG\bin\presets\libvpx-ultrafast.ffpreset">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="FFMPEG\bin\presets\libx264-baseline.ffpreset">
