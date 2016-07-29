@@ -42,7 +42,7 @@ namespace FFMpegSharp.Helpers
         {
             if (root == null)
                 throw new FFMpegException(FFMpegExceptionType.Dependency,
-                    "FFMpeg root is not configured in app config. Missing key 'ffmpegRoot'.");
+                    "Missing dependency FFMpeg.exe, Please reinstall this program.");
 
             var target = Environment.Is64BitProcess ? "x64" : "x86";
 
@@ -50,7 +50,7 @@ namespace FFMpegSharp.Helpers
 
             if (!File.Exists(path))
                 throw new FFMpegException(FFMpegExceptionType.Dependency,
-                    "FFMpeg cannot be found in the root directory!");
+                    "Missing dependency FFMpeg.exe, Please reinstall this program.");
         }
 
         public static class Extensions

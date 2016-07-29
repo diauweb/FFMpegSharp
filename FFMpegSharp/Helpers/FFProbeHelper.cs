@@ -17,11 +17,10 @@ namespace FFMpegSharp.Helpers
             return first == 0 ? second : first;
         }
 
-        public static void RootExceptionCheck(string root)
-        {
+        public static void RootExceptionCheck(string root) {
             if (root == null)
                 throw new FFMpegException(FFMpegExceptionType.Dependency,
-                    "FFProbe root is not configured in app config. Missing key 'ffmpegRoot'.");
+                    "Missing dependency FFProbe.exe, Please reinstall this program.");
 
             var target = Environment.Is64BitProcess ? "x64" : "x86";
 

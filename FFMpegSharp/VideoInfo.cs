@@ -210,7 +210,7 @@ namespace FFMpegSharp
         /// <param name="output">Output location.</param>
         /// <param name="speed">MP4 encoding speed (applies only to mp4 format). Faster results in lower quality.</param>
         /// <param name="size">Aspect ratio of the output video file.</param>
-        /// <param name="audio">Audio quality of the output video file.</param>
+        /// <param name="aQuality">Audio quality of the output video file.</param>
         /// <param name="multithread">Tell FFMpeg to use multithread in the conversion process.</param>
         /// <param name="tryToPurge">
         ///     Flag original file purging after conversion is done (Will not result in exception if file is
@@ -218,7 +218,7 @@ namespace FFMpegSharp
         /// </param>
         /// <returns>Video information object with the new video file.</returns>
         public VideoInfo ConvertTo(VideoType type, FileInfo output, Speed speed = Speed.SuperFast,
-            VideoSize size = VideoSize.Original, AudioQuality audio = AudioQuality.Normal, bool multithread = false,
+            VideoSize size = VideoSize.Original, int aQuality = 160, bool multithread = false,
             bool tryToPurge = false)
         {
             bool success;
@@ -226,13 +226,13 @@ namespace FFMpegSharp
             switch (type)
             {
                 case VideoType.Mp4:
-                    success = FFmpeg.ToMp4(this, output, speed, size, audio, multithread);
+                    success = FFmpeg.ToMp4(this, output, speed, size, aQuality, multithread);
                     break;
                 case VideoType.Ogv:
-                    success = FFmpeg.ToOgv(this, output, size, audio, multithread);
+                    success = FFmpeg.ToOgv(this, output, size, aQuality, multithread);
                     break;
                 case VideoType.WebM:
-                    success = FFmpeg.ToWebM(this, output, size, audio);
+                    success = FFmpeg.ToWebM(this, output, size, aQuality);
                     break;
                 case VideoType.Ts:
                     success = FFmpeg.ToTs(this, output);

@@ -18,7 +18,7 @@ namespace FFMpegSharp.FFMPEG.Extend
         /// <param name="multithread">Use multithreading for conversion.</param>
         /// <returns>Success state.</returns>
         public static bool ToMp4(this FFMpeg encoder, string source, string output, Speed speed = Speed.SuperFast,
-            VideoSize size = VideoSize.Original, AudioQuality aQuality = AudioQuality.Normal, bool multithread = false)
+            VideoSize size = VideoSize.Original, int aQuality = 160, bool multithread = false)
         {
             return encoder.ToMp4(VideoInfo.FromPath(source), new FileInfo(output), speed, size, aQuality, multithread);
         }
@@ -32,7 +32,7 @@ namespace FFMpegSharp.FFMPEG.Extend
         /// <param name="aQuality">Output audio quality.</param>
         /// <returns>Success state.</returns>
         public static bool ToWebM(this FFMpeg encoder, string source, string output, VideoSize size = VideoSize.Original,
-            AudioQuality aQuality = AudioQuality.Normal)
+            int aQuality = 160)
         {
             return encoder.ToWebM(VideoInfo.FromPath(source), new FileInfo(output), size, aQuality);
         }
@@ -47,7 +47,7 @@ namespace FFMpegSharp.FFMPEG.Extend
         /// <param name="multithread">Use multithreading for conversion.</param>
         /// <returns>Success state.</returns>
         public static bool ToOgv(this FFMpeg encoder, string source, string output, VideoSize size = VideoSize.Original,
-            AudioQuality aQuality = AudioQuality.Normal, bool multithread = false)
+            int aQuality = 160, bool multithread = false)
         {
             return encoder.ToOgv(VideoInfo.FromPath(source), new FileInfo(output), size, aQuality, multithread);
         }

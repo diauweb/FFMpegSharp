@@ -12,7 +12,7 @@ namespace FFMpegSharp.FFMPEG
 
         protected FFBase()
         {
-            ConfiguredRoot = ConfigurationManager.AppSettings["ffmpegRoot"];
+            ConfiguredRoot = $@"{Environment.CurrentDirectory}\FFMPEG\bin";
 
             if (ConfiguredRoot.EndsWith("\\"))
                 ConfiguredRoot = ConfiguredRoot.Substring(0, ConfiguredRoot.Length - 1);
