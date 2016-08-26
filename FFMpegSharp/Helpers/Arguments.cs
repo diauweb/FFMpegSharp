@@ -99,6 +99,10 @@ namespace FFMpegSharp.FFMPEG
             return new Argument(size == VideoSize.Original ? string.Empty : $"-vf scale={(int) size} ");
         }
 
+        public static Argument Scale(int size) {
+            return new Argument($"-vf scale={size} ");
+        }
+
         public static Argument Size(Size? size)
         {
             if (!size.HasValue) return new Argument(string.Empty);
