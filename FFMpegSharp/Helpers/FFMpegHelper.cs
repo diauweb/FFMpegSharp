@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
-using FFMpegSharp.FFMPEG.Atomic;
 using FFMpegSharp.FFMPEG.Enums;
 using FFMpegSharp.FFMPEG.Exceptions;
+using FFMpegSharp.FFMPEG;
 
 namespace FFMpegSharp.Helpers
 {
@@ -10,7 +10,7 @@ namespace FFMpegSharp.Helpers
     {
         public static string GetScale(VideoSize size)
         {
-            return Arguments.Scale(size);
+            return Arguments.Scale(size).ToString();
         }
 
         public static void ConversionExceptionCheck(VideoInfo originalVideo, FileInfo convertedPath)

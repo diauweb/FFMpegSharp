@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using FFMpegSharp.FFMPEG;
+using FFMpegSharp.FFMPEG.Legacy;
 
 namespace FFMpegSharp.Extend
 {
@@ -13,7 +14,7 @@ namespace FFMpegSharp.Extend
 
             poster.Save(destination);
 
-            var success = new FFMpeg().PosterWithAudio(new FileInfo(destination), audio, output);
+            var success = new FFMpeg().legacy.PosterWithAudio(new FileInfo(destination), audio, output);
 
             if (!success)
                 throw new OperationCanceledException("Could not add audio.");

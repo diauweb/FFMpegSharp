@@ -5,74 +5,7 @@ using FFMpegSharp.FFMPEG.Enums;
 
 namespace FFMpegSharp.FFMPEG.Extend
 {
-    public static class Extensions
-    {
-        /// <summary>
-        ///     Converts a source video to MP4 format.
-        /// </summary>
-        /// <param name="source">Source video file.</param>
-        /// <param name="output">Output video file.</param>
-        /// <param name="speed">Conversion speed preset.</param>
-        /// <param name="size">Output video size.</param>
-        /// <param name="aQuality">Output audio quality.</param>
-        /// <param name="multithread">Use multithreading for conversion.</param>
-        /// <returns>Success state.</returns>
-        public static bool ToMp4(this FFMpeg encoder, string source, string output, Speed speed = Speed.SuperFast,
-            VideoSize size = VideoSize.Original, int aQuality = 160, bool multithread = false)
-        {
-            return encoder.ToMp4(VideoInfo.FromPath(source), new FileInfo(output), speed, size, aQuality, multithread);
-        }
-
-        /// <summary>
-        ///     Converts a source video to WebM format.
-        /// </summary>
-        /// <param name="source">Source video file.</param>
-        /// <param name="output">Output video file.</param>
-        /// <param name="size">Output video size.</param>
-        /// <param name="aQuality">Output audio quality.</param>
-        /// <returns>Success state.</returns>
-        public static bool ToWebM(this FFMpeg encoder, string source, string output, VideoSize size = VideoSize.Original,
-            int aQuality = 160)
-        {
-            return encoder.ToWebM(VideoInfo.FromPath(source), new FileInfo(output), size, aQuality);
-        }
-
-        /// <summary>
-        ///     Converts a source video to OGV format.
-        /// </summary>
-        /// <param name="source">Source video file.</param>
-        /// <param name="output">Output video file.</param>
-        /// <param name="size">Output video size.</param>
-        /// <param name="aQuality">Output audio quality.</param>
-        /// <param name="multithread">Use multithreading for conversion.</param>
-        /// <returns>Success state.</returns>
-        public static bool ToOgv(this FFMpeg encoder, string source, string output, VideoSize size = VideoSize.Original,
-            int aQuality = 160, bool multithread = false)
-        {
-            return encoder.ToOgv(VideoInfo.FromPath(source), new FileInfo(output), size, aQuality, multithread);
-        }
-
-        /// <summary>
-        ///     Converts a source video to TS format.
-        /// </summary>
-        /// <param name="source">Source video file.</param>
-        /// <param name="output">Output video file.</param>
-        /// <returns>Success state.</returns>
-        public static bool ToTs(this FFMpeg encoder, string source, string output)
-        {
-            return encoder.ToTs(VideoInfo.FromPath(source), new FileInfo(output));
-        }
-
-        /// <summary>
-        ///     Strips a video file of audio.
-        /// </summary>
-        /// <param name="source">Source video file.</param>
-        /// <param name="output">Output video file.</param>
-        /// <returns></returns>
-        public static bool Mute(this FFMpeg encoder, string source, string output)
-        {
-            return encoder.Mute(VideoInfo.FromPath(source), new FileInfo(output));
-        }
+    public static class Extensions { 
 
         /// <summary>
         ///     Saves audio from a specific video file to disk.
@@ -84,7 +17,7 @@ namespace FFMpegSharp.FFMPEG.Extend
         {
             return encoder.ExtractAudio(VideoInfo.FromPath(source), new FileInfo(output));
         }
-
+        
         /// <summary>
         ///     Adds audio to a video file.
         /// </summary>

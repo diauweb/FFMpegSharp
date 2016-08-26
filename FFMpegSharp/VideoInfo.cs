@@ -6,6 +6,7 @@ using System.Linq;
 using FFMpegSharp.Enums;
 using FFMpegSharp.FFMPEG;
 using FFMpegSharp.FFMPEG.Enums;
+using FFMpegSharp.FFMPEG.Legacy;
 
 namespace FFMpegSharp
 {
@@ -17,7 +18,7 @@ namespace FFMpegSharp
         /// <summary>
         ///     Returns the percentage of the current conversion progress.
         /// </summary>
-        public ConversionHandler OnConversionProgress;
+        public FFMPEG.ConversionHandler OnConversionProgress;
 
         /// <summary>
         ///     Create a video information object from a file information object.
@@ -204,61 +205,6 @@ namespace FFMpegSharp
         }
 
         /// <summary>
-        ///     Convert file to a specified format.
-        /// </summary>
-        /// <param name="type">Output format.</param>
-        /// <param name="output">Output location.</param>
-        /// <param name="speed">MP4 encoding speed (applies only to mp4 format). Faster results in lower quality.</param>
-        /// <param name="size">Aspect ratio of the output video file.</param>
-        /// <param name="aQuality">Audio quality of the output video file.</param>
-        /// <param name="multithread">Tell FFMpeg to use multithread in the conversion process.</param>
-        /// <param name="tryToPurge">
-        ///     Flag original file purging after conversion is done (Will not result in exception if file is
-        ///     readonly or missing.).
-        /// </param>
-        /// <returns>Video information object with the new video file.</returns>
-        public VideoInfo ConvertTo(VideoType type, FileInfo output, Speed speed = Speed.SuperFast,
-            VideoSize size = VideoSize.Original, int aQuality = 160, bool multithread = false,
-            bool tryToPurge = false)
-        {
-            bool success;
-            FFmpeg.OnProgress += OnConversionProgress;
-            switch (type)
-            {
-                case VideoType.Mp4:
-                    success = FFmpeg.ToMp4(this, output, speed, size, aQuality, multithread);
-                    break;
-                case VideoType.Ogv:
-                    success = FFmpeg.ToOgv(this, output, size, aQuality, multithread);
-                    break;
-                case VideoType.WebM:
-                    success = FFmpeg.ToWebM(this, output, size, aQuality);
-                    break;
-                case VideoType.Ts:
-                    success = FFmpeg.ToTs(this, output);
-                    break;
-                default:
-                    throw new ArgumentException("Video type is not supported yet!");
-            }
-
-            if (!success)
-                throw new OperationCanceledException("The conversion process could not be completed.");
-
-            if (tryToPurge)
-            {
-                try
-                {
-                    if (Exists)
-                        Delete();
-                } catch { } // do nothing if file is locked
-            }
-
-            FFmpeg.OnProgress -= OnConversionProgress;
-
-            return FromFileInfo(output);
-        }
-
-        /// <summary>
         ///     Remove audio channel from video file.
         /// </summary>
         /// <param name="output">Location of the output video file.</param>
@@ -287,67 +233,6 @@ namespace FFMpegSharp
         public bool ReplaceAudio(FileInfo audio, FileInfo output)
         {
             return FFmpeg.ReplaceAudio(this, audio, output);
-        }
-
-        /// <summary>
-        ///     Take a snapshot in memory.
-        /// </summary>
-        /// <param name="size">Size of the snapshot (resolution).</param>
-        /// <param name="captureTime">Seek the video part that needs to get captured.</param>
-        /// <returns>Bitmap of the snapshot.</returns>
-        public Bitmap Snapshot(Size? size = null, TimeSpan? captureTime = null)
-        {
-            var output = new FileInfo($"{Environment.TickCount}.png");
-
-            var success = FFmpeg.Snapshot(this, output, size, captureTime);
-
-            if (!success)
-                throw new OperationCanceledException("Could not take snapshot!");
-
-            output.Refresh();
-
-            Bitmap result;
-
-            using (var bmp = (Bitmap) Image.FromFile(output.FullName))
-            {
-                using (var ms = new MemoryStream())
-                {
-                    bmp.Save(ms, ImageFormat.Png);
-
-                    result = new Bitmap(ms);
-                }
-            }
-
-            if (output.Exists)
-            {
-                output.Delete();
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        ///     Take a snapshot with output.
-        /// </summary>
-        /// <param name="output">Output file.</param>
-        /// <param name="size">Size of the snapshot (resolution).</param>
-        /// <param name="captureTime">Seek the video part that needs to get captured.</param>
-        /// <returns>Bitmap of the snapshot.</returns>
-        public Bitmap Snapshot(FileInfo output, Size? size = null, TimeSpan? captureTime = null)
-        {
-            var success = FFmpeg.Snapshot(this, output, size, captureTime);
-
-            if (!success)
-                throw new OperationCanceledException("Could not take snapshot!");
-
-            Bitmap result;
-
-            using (var bmp = (Bitmap) Image.FromFile(output.FullName))
-            {
-                result = (Bitmap) bmp.Clone();
-            }
-
-            return result;
         }
 
         /// <summary>

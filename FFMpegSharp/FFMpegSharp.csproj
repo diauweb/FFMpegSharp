@@ -44,14 +44,14 @@
     <Reference Include="System.Web.Extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\FFMpegLegacy.cs" />
     <Compile Include="Enums\VideoType.cs" />
     <Compile Include="Extend\BitmapExtensions.cs" />
     <Compile Include="Extend\UriExtensions.cs" />
     <Compile Include="FFMpegException.cs" />
-    <Compile Include="VideoInfoExtend.cs" />
-    <Compile Include="Atomic\Arguments.cs" />
+    <Compile Include="Helpers\Arguments.cs" />
     <Compile Include="Enums\Codec.cs" />
-    <Compile Include="Enums\Speed.cs" />
+    <Compile Include="Enums\SpeedEnum.cs" />
     <Compile Include="Enums\VideoSize.cs" />
     <Compile Include="Extend\Extensions.cs" />
     <Compile Include="Core\FFBase.cs" />

@@ -2,6 +2,7 @@
 {
     public enum VideoSize
     {
+        
         Hd = 720,
         FullHd = 1080,
         Ed = 480,

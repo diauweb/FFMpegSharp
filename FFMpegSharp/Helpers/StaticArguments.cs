@@ -3,18 +3,16 @@ using System.Drawing;
 using System.IO;
 using FFMpegSharp.FFMPEG.Enums;
 
-namespace FFMpegSharp.FFMPEG.Atomic
+namespace FFMpegSharp.FFMPEG
 {
-    internal static class Arguments
+    internal static class Argument
     {
-
-
         internal static string Speed(Speed speed)
         {
             return $"-preset {speed.ToString().ToLower()} ";
         }
 
-        internal static string Speed(int cpu)
+        public static string Speed(int cpu)
         {
             return $"-quality good -cpu-used {cpu} -deadline realtime ";
         }

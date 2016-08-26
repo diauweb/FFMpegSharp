@@ -1,6 +1,6 @@
 ﻿namespace FFMpegSharp.FFMPEG.Enums
 {
-    public enum Speed
+    public enum SpeedProp
     {
         VerySlow,
         Slower,
